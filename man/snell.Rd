@@ -16,6 +16,14 @@ a vector of scores corresponding to the columns of the input frequency table.
 \description{
 This function calculates Snell scores given counts of scores by subpopulation
 }
+\examples{
+library(dplyr)
+mydata <- data.frame("Groups" = rep(c("A", "B", "C", "D"), 10),
+                     "Scores" = round(runif(40, 0, 5)))
+freqtable <- buildfreqtable(data = mydata, trait = "Scores", subgroup = "Groups")
+snell(freqtable)
+
+}
 \references{
 http://140.136.247.242/~stat2016/stat/NoteOnSnellComp.pdf
 }

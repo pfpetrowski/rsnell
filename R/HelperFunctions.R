@@ -1,8 +1,7 @@
 build_cumprob <- function(noncumprobabilities){
-  #This function builds a table of cumulative probabilities for each category.
-  #Ie the probability that an observation falls in a given category or any of
-  #the categories below it
-  
+  # This function builds a table of cumulative probabilities for each category.
+  # It is the probability that an observation falls in a given category or any of
+  # the categories below it  
   cumprobs <- apply(X = noncumprobabilities,
                     MARGIN = 1,
                     FUN = cumsum,
@@ -79,8 +78,8 @@ calc_ranges <- function(categorytotals, nijplusnij1timesp){
   # I think you're basically computing the difference of the rightmost
   # boundaries of Xa & Xa-1
   
-  ranges <- setNames(rep(NA, length(categorytotals)-2),
-                     names(categorytotals)[2:(length(categorytotals)-1)])
+  ranges <- stats::setNames(rep(NA, length(categorytotals)-2),
+                            names(categorytotals)[2:(length(categorytotals)-1)])
   # Initialize vector to store results. The vecotr is named with the same
   # names as category totals
   
@@ -120,7 +119,8 @@ calc_ranges <- function(categorytotals, nijplusnij1timesp){
 calc_boundaries <- function(ranges, categorytotals){
   # calculate the rightmost boundary for each category
   
-  boundaries <- setNames(rep(NA, length(categorytotals) - 1), names(categorytotals)[1:(length(categorytotals) - 1)])
+  boundaries <- stats::setNames(rep(NA, length(categorytotals) - 1),
+                                names(categorytotals)[1:(length(categorytotals) - 1)])
   # initialize a vector to store the results
   
   for (ii in 1:length(boundaries)){
@@ -159,7 +159,8 @@ calc_deflection <- function(noncumprobabilities){
 calc_scores <- function(boundaries, noncumprobabilities, categorytotals){
   #Calculate scores for each category
   
-  scores <- setNames(rep(NA, length(categorytotals)), names(categorytotals))
+  scores <- stats::setNames(rep(NA, length(categorytotals)),
+                            names(categorytotals))
   # initialize vector to store the scores in. Names are the same as those in categorytotals
   
   for (ii in 1:length(scores)){

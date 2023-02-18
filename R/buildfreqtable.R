@@ -16,11 +16,16 @@
 #'                     "Scores" = round(runif(40, 0, 5)))
 #' buildfreqtable(data = mydata, trait = "Scores", subgroup = "Groups")
 #'
+#' @importFrom dplyr group_by across count %>%
+#' @importFrom tidyselect all_of
+#' @importFrom tidyr pivot_wider
+#' @importFrom tibble column_to_rownames
+#'
 #' @export
 buildfreqtable <- function(data, trait, subgroup){
   # groups the data by subgroup and trait and counts the occurrences for each combination
   # column name of the count column is changed to the specified trait
-  counts <- data %>% dplyr::group_by(across(all_of(c(subgroup, trait)))) %>% count()
+  counts <- data %>% dplyr::group_by(dplyr::across(tidyselect::all_of(c(subgroup, trait)))) %>% dplyr::count()
   colnames(counts)[2] <- trait
   
   # reshapes the data into frequency table with the specified subgroup as index, 
@@ -29,7 +34,7 @@ buildfreqtable <- function(data, trait, subgroup){
   # with a count of 0 using values_fill=0
   freqtable <- counts %>% tidyr::pivot_wider(id_cols = subgroup,
                                              names_from = trait,
-                                             values_from = n,
+                                             values_from = "n",
                                              values_fill = 0)
   # reshapes the data into frequency table with HerdYear as index, 
   # trait as column names and count as values.
@@ -39,7 +44,7 @@ buildfreqtable <- function(data, trait, subgroup){
   
   freqtable <- as.data.frame(freqtable) %>%
     tibble::column_to_rownames(subgroup) %>%
-    dplyr::select(all_of(as.character(sort(unique(data[, trait])))))
+    dplyr::select(tidyselect::all_of(as.character(sort(unique(data[, trait])))))
   #Ensure that columns are sorted in order of ascending score
   #And drop the HerdYear column
   
