@@ -1,33 +1,3 @@
-buildfreqtable <- function(data, trait){
-  # Will be used to convert the raw data from the database to count data that 
-  #can be passed into the snell function
-  
-  counts <- data %>% group_by(HerdYear, across(trait)) %>% count()
-  colnames(counts)[2] <- trait
-  # groups the data by HerdYear and trait and counts the occurrences for each combination
-  # column name of the count column is changed to the specified trait
-  
-  freqtable <- counts %>% pivot_wider(id_cols = HerdYear,
-                                      names_from = trait,
-                                      values_from = n,
-                                      values_fill = 0)
-  # reshapes the data into frequency table with HerdYear as index, 
-  # trait as column names and count as values.
-  # combinations of HerdYear and trait that do not appear in the original data are still represented
-  # with a count of 0 using values_fill=0
-  
-  
-  freqtable <- as.data.frame(freqtable) %>%
-    column_to_rownames("HerdYear") %>%
-    select(all_of(as.character(sort(unique(data[, trait])))))
-  #Ensure that columns are sorted in order of ascending score
-  #And drop the HerdYear column
-  
-  return(freqtable)
-  
-}
-
-
 build_cumprob <- function(noncumprobabilities){
   #This function builds a table of cumulative probabilities for each category.
   #Ie the probability that an observation falls in a given category or any of
@@ -226,43 +196,6 @@ calc_scores <- function(boundaries, noncumprobabilities, categorytotals){
   
 }
 
-
-
-snell <- function(table){
-  # http://140.136.247.242/~stat2016/stat/NoteOnSnellComp.pdf
-  # This spreadhseet helps
-  # https://abacusbio-my.sharepoint.com/:x:/g/personal/pivot_abacusbio_co_nz/EUxWTQpOehxHqVs0Tkuh0S4BLss_Efk1yEydQYfNTSD9ig?e=lQCmip
-  
-  groups <- rownames(table) # grouping categories used by snell
-  categories <- colnames(table) # score categories used 
-  
-  groupcounts <- rowSums(table) # count of observations in each group
-  categorytotals <- colSums(table) # count of observations in each scoring category
-  
-  #include check that groupcounts are all non zero
-  
-  noncumprobabilities <- table / groupcounts
-  cumprobabilities <- build_cumprob(noncumprobabilities)
-  
-  nijplusnij1timesp <- calc_nijplusnij1timesp(table, cumprobabilities)
-  #colnames(nijplusnij1timesp) <- names(table)[1:(ncol(table) - 1)]
-  
-  
-  ranges <- calc_ranges(categorytotals = categorytotals, nijplusnij1timesp = nijplusnij1timesp)
-  # calculate ranges
-  
-  boundaries <- calc_boundaries(ranges = ranges, categorytotals = categorytotals)
-  #calculate bundaries
-  
-  # calculate scores
-  scores <- calc_scores(boundaries = boundaries,
-                        noncumprobabilities = noncumprobabilities,
-                        categorytotals = categorytotals)
-  
-  
-  return(scores)
-  
-}
 
 
 
