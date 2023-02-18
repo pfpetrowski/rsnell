@@ -1,2 +1,8 @@
 Package: rsnell
 Version: 0.1
+Date: February 18, 2023
+Title: Snell Scoring
+Description: An R implementation of the Snell scoring procedure
+Author: Paul Petrowski <pfpetrowski@gmail.com>
+Maintainer: Paul Petrowski <pfpetrowski@gmail.com>
+RoxygenNote: 7.2.1
