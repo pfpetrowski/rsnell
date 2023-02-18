@@ -11,6 +11,7 @@
 #' @details This function groups the data by the specified subgroup and trait, and counts the occurrences for each combination. It then reshapes the data into a frequency table.
 #'
 #' @examples
+#' library(dplyr)
 #' mydata <- data.frame("Groups" = rep(c("A", "B", "C", "D"), 10),
 #'                     "Scores" = round(runif(40, 0, 5)))
 #' buildfreqtable(data = mydata, trait = "Scores", subgroup = "Groups")

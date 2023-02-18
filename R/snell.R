@@ -11,6 +11,7 @@
 #'   http://140.136.247.242/~stat2016/stat/NoteOnSnellComp.pdf
 #'
 #' @examples
+#' library(dplyr)
 #' mydata <- data.frame("Groups" = rep(c("A", "B", "C", "D"), 10),
 #'                      "Scores" = round(runif(40, 0, 5)))
 #' freqtable <- buildfreqtable(data = mydata, trait = "Scores", subgroup = "Groups")
