@@ -10,6 +10,12 @@
 #' @references 
 #'   http://140.136.247.242/~stat2016/stat/NoteOnSnellComp.pdf
 #'
+#' @examples
+#' mydata <- data.frame("Groups" = rep(c("A", "B", "C", "D"), 10),
+#'                      "Scores" = round(runif(40, 0, 5)))
+#' freqtable <- buildfreqtable(data = mydata, trait = "Scores", subgroup = "Groups")
+#' snell(freqtable)
+#'
 #' @export
 snell <- function(table){
   # http://140.136.247.242/~stat2016/stat/NoteOnSnellComp.pdf
