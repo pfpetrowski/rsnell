@@ -9,11 +9,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-source("./Functions.R")
+source("../R/HelperFunctions.R")
+source("../R/buildfreqtable.R")
+source("../R/snell.R")
 ```
 
 
-Create test data (from snell)
+## Create test data (from snell)
 ```{r}
 
 data <- data.frame(
@@ -35,24 +37,37 @@ data
 
 
 ```{r}
-source("./Functions.R")
 snell(data)
 ```
+The originally published scores are:
+-1.1, 0.6, 1.6, 2.2, 2.8, 4.0, 5.8
 
-My results are slightly different from the published rsults for the outer two categories. I think mine are actually more accurate though since the deflection in the paper is based on a rule of thumb and mine is actually calculated.
+The scores in the spreadsheet are:
+-1.1, 0.611887716, 1.602323384 ,2.186738697, 2.837534795, 4.012972486, 5.84348144
+
+My results are slightly different from the published results for the outer two categories. I think mine are actually more accurate though since the deflection in the paper is based on a rule of thumb and mine is actually calculated.
 
 
-Test Tong data
+## Test Tong data
 Create Test data from milton
 ```{r}
-tong_cumfreqs <- data.frame(
+tong <- data.frame(
   "Easy" = c(0,0,1,0,1),
   "Medium" = c(4,7,0,3,1),
   "Difficult" = c(25,44,20,28,15)
 )
-
 tong
 ```
+
+
+```{r}
+snell(tong)
+```
+The published values in tong et al are:
+-1, 1.025, and 4.5
+
+So rsnell produces very similar results, but not exactly the same. Unclear where
+the discrepancy comes from.
 
 
 
