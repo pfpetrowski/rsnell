@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
+library(dplyr)
+
 source("../R/HelperFunctions.R")
 source("../R/buildfreqtable.R")
 source("../R/snell.R")
@@ -29,7 +31,7 @@ data <- data.frame(
  row.names = as.character(1:12)
 )
 
-data
+str(data)
 ```
 
 
@@ -69,6 +71,34 @@ The published values in tong et al are:
 So rsnell produces very similar results, but not exactly the same. Unclear where
 the discrepancy comes from.
 
+
+## Demo buildfreqtable
+```{r}
+mydata <- data.frame("Groups" = rep(c("A", "B", "C", "D"), 10),
+                     "Scores" = round(runif(40, 0, 5)))
+mydata
+```
+
+```{r}
+freqtable <- buildfreqtable(data = mydata, trait = "Scores", subgroup = "Groups")
+freqtable
+```
+
+```{r}
+snell(freqtable)
+```
+
+
+
+## Test binary failure
+```{r}
+binaryfreqtable <- data.frame("Score1" = round(runif(40, 1, 2)),
+                              "Score2" = round(runif(40, 1, 2)),
+                              row.names = as.character(1:40))
+binaryfreqtable
+
+snell(binaryfreqtable)
+```
 
 
 

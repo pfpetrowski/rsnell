@@ -23,6 +23,10 @@ snell <- function(table){
   # This spreadhseet helps
   # https://abacusbio-my.sharepoint.com/:x:/g/personal/pivot_abacusbio_co_nz/EUxWTQpOehxHqVs0Tkuh0S4BLss_Efk1yEydQYfNTSD9ig?e=lQCmip
   
+  if (ncol(table) <= 2){
+    stop("Snell scoring does not work for binary variables. 3 or more categories are required.")
+  }
+  
   groups <- rownames(table) # grouping categories used by snell
   categories <- colnames(table) # score categories used 
   
