@@ -13,9 +13,9 @@ February 18, 2023
 
 This package is an R implementation of the Snell scoring procedure originally derived by EJ Snell (1964) [1]. The scoring procedure is used to approximate the distance between ordinal values, assuming an approximately normal underlying distribution. The result are values on a continuous scale that are more amenable to conventional statistical analyses.
 
-Tong et al [2] recognized the value in applying teh Snell scoring procedure to calving ease data. Today, Interbull requires that calving ease traits are Snell transformed prior to genetic evaluation.
+Tong et al [2] recognized the value in applying the Snell scoring procedure to calving ease data. Today, Interbull requires that calving ease traits are Snell transformed prior to genetic evaluation.
 
-Practically, Snell scoring can be applied in any scenario where subjective ordinal scores have been used as measurements.
+Practically, Snell scoring can be applied in any scenario where subjective ordinal scores have been used as measurements. Note that there must be three or more possible scores in order for the snell transformation to work. Binary scores will not work.
 
 Chien Ho Wu (2008) [3] released an excel spreadsheet containing practical formulas and calculations to execute the snell procedure. This R package is based heavily on this excel spreadsheet. A significant difference between the R package and the spreadsheet is that while the spreadsheet uses a "rule fo thumb" to estimate boundary scores, the R package uses an analytic formula. The link to the spreadsheet appears to be broken today. I will aim to host it in this repository or on my website as a long term solution, but in the meantime I can provide it upon request.
 
