@@ -2,7 +2,7 @@ Package: rsnell
 Version: 0.1
 Date: 2023-02-18
 Title: Snell Scoring
-Description: An R implementation of the Snell scoring procedure.
+Description: The Snell scoring procedure, implemented in R.
 Author: Paul Petrowski <pfpetrowski@gmail.com>
 Maintainer: Paul Petrowski <pfpetrowski@gmail.com>
 RoxygenNote: 7.2.1
