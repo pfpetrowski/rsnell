@@ -91,10 +91,19 @@ snell(freqtable)
 
 
 ## Test binary failure
+raw data
 ```{r}
-binaryfreqtable <- data.frame("Score1" = round(runif(40, 1, 2)),
-                              "Score2" = round(runif(40, 1, 2)),
-                              row.names = as.character(1:40))
+rawdata <- data.frame(Groups = rep(c("A", "B", "C", "D"), 10),
+                      Scores = round(runif(40, 0, 1))
+                      )
+```
+
+
+call buildfreqtable
+```{r}
+binaryfreqtable <- buildfreqtable(data = rawdata,
+                                  trait = "Scores",
+                                  subgroup = "Groups")
 binaryfreqtable
 
 snell(binaryfreqtable)

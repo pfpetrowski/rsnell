@@ -48,6 +48,11 @@ buildfreqtable <- function(data, trait, subgroup){
   #Ensure that columns are sorted in order of ascending score
   #And drop the HerdYear column
   
+  if (ncol(data) <= 2){
+    warning("A frequency table has been produced, but the trait does not have 3 or more categories
+            and snell will fail if this table is passed.")
+  }
+  
   return(freqtable)
   
 }
