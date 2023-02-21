@@ -8,6 +8,8 @@ Paul F. Petrowski
 
 February 18, 2023
 
+With thanks to AbacusBio for funding the development of this package.
+
 
 ## Summary
 
