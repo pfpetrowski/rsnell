@@ -62,7 +62,7 @@ buildfreqtable <- function(data, trait, subgroup, order){
     
   }
   
-  if (n_distinct(data[[trait]]) <= 2){
+  if (ncol(freqtable) <= 2){
     warning("A frequency table has been produced, but the trait does not have 3 or more categories
             and snell will fail if this table is passed.")
   }
