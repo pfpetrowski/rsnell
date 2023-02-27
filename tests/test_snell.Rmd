@@ -110,4 +110,34 @@ snell(binaryfreqtable)
 ```
 
 
+Test that the order argument is working
+```{r}
+mydata <- data.frame("Groups" = rep(c("A", "B", "C", "D"), 10),
+                     "Scores" = sample(c("Easy", "Medium", "Hard"), 40, replace = T))
+mydata
+```
+
+```{r}
+#should work
+buildfreqtable(data = mydata,
+               trait = "Scores",
+               subgroup = "Groups",
+               order = c("Easy", "Medium", "Hard"))
+
+
+#should fail
+buildfreqtable(data = mydata,
+               trait = "Scores",
+               subgroup = "Groups",
+               order = c("x", "y", "z")) # wrong letters
+
+# Will have wrong order due to alphabetical sorting
+buildfreqtable(data = mydata,
+               trait = "Scores",
+               subgroup = "Groups")
+```
+
+
+
+
 
