@@ -4,7 +4,7 @@
 \alias{buildfreqtable}
 \title{Convert raw data to count data for use in snell function}
 \usage{
-buildfreqtable(data, trait, subgroup)
+buildfreqtable(data, trait, subgroup, order)
 }
 \arguments{
 \item{data}{A data frame containing the raw data}
@@ -12,6 +12,8 @@ buildfreqtable(data, trait, subgroup)
 \item{trait}{A character string specifying the trait to be analyzed}
 
 \item{subgroup}{A character string specifying the column containing the grouping variable}
+
+\item{order}{A character vector specifying the order in which the categories of the trait should be placed}
 }
 \value{
 A frequency table with the specified subgroup as the rownames, the scores of the specified trait as column names, and count as values
