@@ -101,12 +101,13 @@ rawdata <- data.frame(Groups = rep(c("A", "B", "C", "D"), 10),
 
 call buildfreqtable
 ```{r}
+#Runs with a warning
 binaryfreqtable <- buildfreqtable(data = rawdata,
                                   trait = "Scores",
                                   subgroup = "Groups")
 binaryfreqtable
 
-snell(binaryfreqtable)
+snell(binaryfreqtable) #Snell will fail
 ```
 
 
@@ -131,7 +132,7 @@ buildfreqtable(data = mydata,
                subgroup = "Groups",
                order = c("x", "y", "z")) # wrong letters
 
-# Will have wrong order due to alphabetical sorting
+# Will have wrong order due to alphabetical sorting. Warning will be raised
 buildfreqtable(data = mydata,
                trait = "Scores",
                subgroup = "Groups")

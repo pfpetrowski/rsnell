@@ -26,6 +26,11 @@
 buildfreqtable <- function(data, trait, subgroup, order){
   # groups the data by subgroup and trait and counts the occurrences for each combination
   # column name of the count column is changed to the specified trait
+
+  if (!is.numeric(data[[trait]]) & missing(order)){
+    warning("The trait is not numeric. Consider setting the order parameter.")
+  }
+  
   counts <- data %>% dplyr::group_by(dplyr::across(tidyselect::all_of(c(subgroup, trait)))) %>% dplyr::count()
   colnames(counts)[2] <- trait
   
